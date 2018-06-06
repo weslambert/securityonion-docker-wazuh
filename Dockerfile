@@ -28,6 +28,10 @@ RUN yum install -y nodejs
 RUN rpm -i https://packages.wazuh.com/yum/el/7/x86_64/wazuh-api-2.0.1-1.el7.x86_64.rpm
 RUN yum install -y wazuh-api
 
+# Add OSSEC config
+ADD config/securityonion_rules.xml /var/ossec/ruleset/rules/securityonion_rules.xml
+ADD config/ossec.conf /var/ossec/etc/ossec.conf
+
 # Adding first run script.
 ADD config/data_dirs.env /data_dirs.env
 ADD config/init.bash /init.bash

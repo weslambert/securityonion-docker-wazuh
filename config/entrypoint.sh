@@ -112,5 +112,11 @@ trap "ossec_shutdown; exit" SIGINT SIGTERM
 
 chmod -R g+rw ${DATA_PATH}
 
+# Start wazuh-manager
 /var/ossec/bin/ossec-control start
+
+# Start wazuh-api
+/bin/node /var/ossec/api/app.js &
+
+# Go to shell
 /bin/bash

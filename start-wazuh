@@ -1,5 +1,4 @@
 #!/bin/bash
-# Wazuh start script
 
 # If container is running, stop and remove it
 if docker ps | grep -q "so-wazuh"; then
@@ -13,9 +12,8 @@ docker run --hostname=${HOSTNAME}-wazuh --name=so-wazuh -it --detach \
                         --publish 0.0.0.0:55000:55000 \
                         --publish 0.0.0.0:1514:1514/udp \
                         --volume /opt/so/wazuh/:/var/ossec/data/ \
-                        --volume /home/$SUDO_USER/ossec.conf:/wazuh-config-mount/etc/ossec.conf:ro \
 			so-wazuh
-
+#--volume /home/$SUDO_USER/ossec.conf:/wazuh-config-mount/etc/ossec.conf:ro \
 # Connect container to so-elastic-net Docker network
 docker network connect --alias wazuh so-elastic-net so-wazuh
 docker logs -f so-wazuh

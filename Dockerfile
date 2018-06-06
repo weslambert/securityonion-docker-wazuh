@@ -14,7 +14,7 @@ RUN yum install -y openssl
 
 # Creating ossec user as uid:gid 943:943
 RUN groupadd -g 945 ossec
-RUN useradd -u 945 -g 945 -d /var/osssec -s /sbin/nologin ossec
+RUN useradd -u 945 -g 945 -d /var/ossec -s /sbin/nologin ossec
 
 # Download wazuh-manager pkg
 RUN rpm -i https://packages.wazuh.com/yum/el/7/x86_64/wazuh-manager-2.0.1-1.el7.x86_64.rpm

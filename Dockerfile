@@ -1,3 +1,4 @@
+# Based off of https://github.com/wazuh/wazuh-docker
 FROM centos:7
 
 LABEL maintainer "Security Onion Solutions, LLC"

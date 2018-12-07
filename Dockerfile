@@ -3,21 +3,18 @@ FROM centos:7
 
 LABEL maintainer "Security Onion Solutions, LLC"
 LABEL version="Wazuh Manager"
-LABEL description="Wazuh Manager running in Docker container for use with Security Onion"
+LABEL description="Wazuh Manager and API running in Docker container for use with Security Onion"
 
 RUN yum update -y
 
 # Install pre-reqs
-RUN yum install -y initscripts
-RUN yum install -y expect
-RUN yum install -y logrotate
-RUN yum install -y openssl
+RUN yum install -y initscripts expect logrotate openssl
 
 # Creating ossec users
-RUN groupadd -g 945 ossec
-RUN useradd -u 943 -g 945 -d /var/ossec -s /sbin/nologin ossecm
-RUN useradd -u 944 -g 945 -d /var/ossec -s /sbin/nologin ossecr
-RUN useradd -u 945 -g 945 -d /var/ossec -s /sbin/nologin ossec
+RUN groupadd -g 945 ossec && \
+    useradd -u 943 -g 945 -d /var/ossec -s /sbin/nologin ossecm && \
+    useradd -u 944 -g 945 -d /var/ossec -s /sbin/nologin ossecr && \
+    useradd -u 945 -g 945 -d /var/ossec -s /sbin/nologin ossec
 
 # Add Wazuh repo
 ADD config/repos.bash /repos.bash
@@ -33,6 +30,7 @@ RUN yum install -y wazuh-manager
 # Install nodejs and wazuh-api 
 RUN curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 RUN yum install -y nodejs 
+
 #RUN rpm -i https://packages.wazuh.com/yum/el/7/x86_64/wazuh-api-2.0.1-1.el7.x86_64.rpm
 RUN yum install -y wazuh-api
 

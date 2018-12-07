@@ -13,8 +13,10 @@ RUN yum install -y expect
 RUN yum install -y logrotate
 RUN yum install -y openssl
 
-# Creating ossec user as uid:gid 943:943
+# Creating ossec users
 RUN groupadd -g 945 ossec
+RUN useradd -u 943 -g 945 -d /var/ossec -s /sbin/nologin ossecm
+RUN useradd -u 944 -g 945 -d /var/ossec -s /sbin/nologin ossecr
 RUN useradd -u 945 -g 945 -d /var/ossec -s /sbin/nologin ossec
 
 # Add Wazuh repo
